@@ -2,6 +2,7 @@
 const axios = require('axios');
 const { Pool } = require('pg');
 const cron = require('node-cron');
+const { db, api, filters, chains, logging } = require('./config');
 require('dotenv').config();
 
 class TokenMonitor {
