@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Local environment variables
+.env
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional: ignore logs and coverage
+logs
+*.log
+coverage/
