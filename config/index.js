@@ -13,7 +13,7 @@ const {
   retryRequest,
   RateLimiter 
 } = require('./api');
-const { filterConfig, TokenFilter } = require('./filters');
+const { filterConfig, TokenFilter } = require('./filter');
 const {
   chainConfigs,
   dexConfigs,
@@ -59,7 +59,7 @@ const validateConfig = () => {
   const errors = [];
   
   // Required database configuration
-  const requiredDBVars = ['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'];
+  const requiredDBVars = ['DB_HOST', 'DB_USER', 'DB_NAME'];
   requiredDBVars.forEach(varName => {
     if (!process.env[varName]) {
       errors.push(`Missing required environment variable: ${varName}`);

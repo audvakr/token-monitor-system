@@ -203,7 +203,7 @@ const getSupportedChains = () => {
   if (envChains) {
     return envChains.split(',').map(chain => chain.trim());
   }
-  return ['ethereum', 'bsc', 'polygon', 'arbitrum'];
+  return ['solana']; // Default to Solana only
 };
 
 // Get chain configuration
@@ -284,14 +284,14 @@ const getDEXTrustScore = (dexId) => {
 
 // Chain priority for processing (higher priority chains processed first)
 const chainPriority = {
-  ethereum: 10,
-  bsc: 9,
-  polygon: 8,
-  arbitrum: 7,
-  optimism: 6,
-  avalanche: 5,
-  fantom: 4,
-  solana: 3
+  solana: 10, // Solana gets highest priority
+  ethereum: 9,
+  bsc: 8,
+  polygon: 7,
+  arbitrum: 6,
+  optimism: 5,
+  avalanche: 4,
+  fantom: 3
 };
 
 // Get chains sorted by priority

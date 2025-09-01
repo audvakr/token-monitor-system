@@ -33,7 +33,7 @@ const filterConfig = {
   // DEX and Chain filters
   allowedDEXs: process.env.ALLOWED_DEXS ? process.env.ALLOWED_DEXS.split(',') : null, // All DEXs by default
   blockedDEXs: process.env.BLOCKED_DEXS ? process.env.BLOCKED_DEXS.split(',') : [],
-  allowedChains: process.env.SUPPORTED_CHAINS ? process.env.SUPPORTED_CHAINS.split(',') : ['ethereum', 'bsc', 'polygon'],
+  allowedChains: process.env.SUPPORTED_CHAINS ? process.env.SUPPORTED_CHAINS.split(',') : ['solana'],
 
   // Market cap estimates (optional)
   minMarketCapUSD: parseFloat(process.env.MIN_MARKET_CAP_USD) || null,
