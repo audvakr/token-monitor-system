@@ -3,17 +3,19 @@ const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
 const path = require('path');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// PostgreSQL connection
+// PostgreSQL connection via environment variables
 const pool = new Pool({
-  user: 'your_username',
-  host: 'localhost',
-  database: 'token_monitor',
-  password: 'your_password',
-  port: 5432,
+  host: process.env.DB_HOST || 'localhost',
+  port: Number(process.env.DB_PORT || 5432),
+  database: process.env.DB_NAME || 'token_monitor',
+  user: process.env.DB_USER || 'postgres',
+  password: process.env.DB_PASSWORD || '',
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
 });
 
 // Middleware

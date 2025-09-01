@@ -46,22 +46,17 @@ ALTER USER your_username CREATEDB;
 \q
 ```
 
-4. **Configure Database Connection:**
+4. **Configure Database Connection (Environment Variables):**
 
-Update the database connection settings in all files:
-- `token-monitor.js`
-- `server.js` 
-- `setup.js`
-
-Replace the placeholder values:
-```javascript
-const pool = new Pool({
-  user: 'your_username',        // Replace with your PostgreSQL username
-  host: 'localhost',
-  database: 'token_monitor',
-  password: 'your_password',    // Replace with your PostgreSQL password
-  port: 5432,
-});
+Create a `.env` file in the project root:
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=token_monitor
+DB_USER=postgres
+DB_PASSWORD=
+DB_SSL=false
+DB_BOOTSTRAP_LOCAL=false
 ```
 
 5. **Create project structure:**
@@ -73,6 +68,17 @@ mkdir public
 6. **Setup database:**
 ```bash
 node setup.js
+```
+
+If you want the script to create a local database first (requires local superuser access), set `DB_BOOTSTRAP_LOCAL=true` and define the admin connection:
+
+```env
+DB_BOOTSTRAP_LOCAL=true
+DB_ADMIN_USER=postgres
+DB_ADMIN_PASSWORD=
+DB_ADMIN_HOST=localhost
+DB_ADMIN_PORT=5432
+DB_ADMIN_DB=postgres
 ```
 
 ## Configuration

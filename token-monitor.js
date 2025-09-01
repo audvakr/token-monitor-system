@@ -2,16 +2,18 @@
 const axios = require('axios');
 const { Pool } = require('pg');
 const cron = require('node-cron');
+require('dotenv').config();
 
 class TokenMonitor {
   constructor() {
-    // PostgreSQL connection
+    // PostgreSQL connection via environment variables
     this.pool = new Pool({
-      user: 'your_username',
-      host: 'localhost',
-      database: 'token_monitor',
-      password: 'your_password',
-      port: 5432,
+      host: process.env.DB_HOST || 'localhost',
+      port: Number(process.env.DB_PORT || 5432),
+      database: process.env.DB_NAME || 'token_monitor',
+      user: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASSWORD || '',
+      ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
     });
 
     // Configuration for filtering

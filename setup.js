@@ -1,40 +1,45 @@
 // setup.js - Database setup script
 const { Pool } = require('pg');
+require('dotenv').config();
 
 async function setupDatabase() {
-  // First connect without specifying a database to create it
-  const adminPool = new Pool({
-    user: 'your_username',
-    host: 'localhost',
-    database: 'postgres', // Connect to default postgres database
-    password: 'your_password',
-    port: 5432,
-  });
+  // Optional: local admin connection to create database (only if DB_BOOTSTRAP_LOCAL=true)
+  const shouldBootstrapLocal = process.env.DB_BOOTSTRAP_LOCAL === 'true';
+  const adminPool = shouldBootstrapLocal ? new Pool({
+    user: process.env.DB_ADMIN_USER || 'postgres',
+    host: process.env.DB_ADMIN_HOST || 'localhost',
+    database: process.env.DB_ADMIN_DB || 'postgres',
+    password: process.env.DB_ADMIN_PASSWORD || '',
+    port: Number(process.env.DB_ADMIN_PORT || 5432),
+  }) : null;
 
   try {
     console.log('🔄 Setting up database...');
 
-    // Create database if it doesn't exist
-    try {
-      await adminPool.query('CREATE DATABASE token_monitor');
-      console.log('✅ Database "token_monitor" created successfully');
-    } catch (error) {
-      if (error.code === '42P04') {
-        console.log('ℹ️  Database "token_monitor" already exists');
-      } else {
-        throw error;
+    // Create database locally if requested
+    if (shouldBootstrapLocal && adminPool) {
+      try {
+        await adminPool.query('CREATE DATABASE token_monitor');
+        console.log('✅ Database "token_monitor" created successfully');
+      } catch (error) {
+        if (error.code === '42P04') {
+          console.log('ℹ️  Database "token_monitor" already exists');
+        } else {
+          throw error;
+        }
       }
+
+      await adminPool.end();
     }
 
-    await adminPool.end();
-
-    // Now connect to the token_monitor database
+    // Connect using environment variables (works for local or remote DB)
     const pool = new Pool({
-      user: 'your_username',
-      host: 'localhost',
-      database: 'token_monitor',
-      password: 'your_password',
-      port: 5432,
+      host: process.env.DB_HOST || 'localhost',
+      port: Number(process.env.DB_PORT || 5432),
+      database: process.env.DB_NAME || 'token_monitor',
+      user: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASSWORD || '',
+      ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
     });
 
     // Create tables
