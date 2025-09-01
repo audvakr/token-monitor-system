@@ -1,0 +1,513 @@
+# Token Monitor System
+
+A comprehensive token monitoring system that tracks new token launches using DexScreener API, validates them with RugCheck API, and provides real-time filtering and analysis.
+
+## Features
+
+- 🔍 **Real-time Token Monitoring**: Automatically fetches latest token pairs from DexScreener
+- 🛡️ **Rug Check Integration**: Validates tokens using RugCheck API for safety analysis
+- 📊 **Advanced Filtering**: Filter tokens by holders, volume, liquidity, net traders, and more
+- 💾 **PostgreSQL Storage**: Persistent storage with optimized indexing
+- 🌐 **Web Dashboard**: Beautiful HTML dashboard for monitoring and analysis
+- ⚡ **Live Updates**: Auto-refresh every 30 seconds with real-time data
+- 📱 **Responsive Design**: Works on desktop and mobile devices
+
+## Prerequisites
+
+- Node.js (v16 or higher)
+- PostgreSQL (v12 or higher)
+- npm or yarn package manager
+
+## Installation
+
+1. **Clone and setup the project:**
+```bash
+mkdir token-monitor
+cd token-monitor
+npm init -y
+```
+
+2. **Install dependencies:**
+```bash
+npm install axios cors express node-cron pg
+npm install -D nodemon
+```
+
+3. **Setup PostgreSQL:**
+
+Make sure PostgreSQL is installed and running. Create a database user if needed:
+```sql
+-- Connect to PostgreSQL as superuser
+sudo -u postgres psql
+
+-- Create user and grant privileges
+CREATE USER your_username WITH PASSWORD 'your_password';
+ALTER USER your_username CREATEDB;
+\q
+```
+
+4. **Configure Database Connection:**
+
+Update the database connection settings in all files:
+- `token-monitor.js`
+- `server.js` 
+- `setup.js`
+
+Replace the placeholder values:
+```javascript
+const pool = new Pool({
+  user: 'your_username',        // Replace with your PostgreSQL username
+  host: 'localhost',
+  database: 'token_monitor',
+  password: 'your_password',    // Replace with your PostgreSQL password
+  port: 5432,
+});
+```
+
+5. **Create project structure:**
+```bash
+mkdir public
+# Save the HTML dashboard as public/index.html
+```
+
+6. **Setup database:**
+```bash
+node setup.js
+```
+
+## Configuration
+
+### Monitoring Filters
+
+Edit the filter configuration in `token-monitor.js`:
+
+```javascript
+this.config = {
+  minHolders: 50,                    // Minimum number of holders
+  maxTopHolderPercentage: 50,        // Max percentage top holder can own
+  minVolume24h: 1000,                // Minimum 24h volume in USD
+  minNetTraders: 10,                 // Minimum estimated net traders
+  minLiquidity: 5000,                // Minimum liquidity in USD
+  maxAge: 24 * 60 * 60 * 1000,      // Only tokens created in last 24h
+};
+```
+
+### Supported Chains
+
+The system monitors these blockchains by default:
+- Ethereum (`ethereum`)
+- Binance Smart Chain (`bsc`)
+- Polygon (`polygon`)
+- Arbitrum (`arbitrum`)
+- Optimism (`optimism`)
+- Avalanche (`avalanche`)
+
+Modify the chains array in the `processTokens()` call to customize.
+
+## Usage
+
+### 1. Start the Token Monitor (Background Process)
+
+This runs the monitoring and data collection:
+
+```bash
+# Run once
+node token-monitor.js
+
+# Or run with process manager (recommended)
+npm install -g pm2
+pm2 start token-monitor.js --name "token-monitor"
+pm2 startup  # To auto-start on system reboot
+```
+
+### 2. Start the Web Server
+
+This serves the dashboard and API:
+
+```bash
+# Development mode (with auto-restart)
+npm run dev
+
+# Production mode
+npm start
+```
+
+### 3. Access the Dashboard
+
+Open your browser and navigate to: `http://localhost:3000`
+
+## API Endpoints
+
+### Get Tokens
+```
+GET /api/tokens
+```
+
+**Query Parameters:**
+- `limit` - Number of results (default: 50)
+- `offset` - Pagination offset (default: 0)
+- `chain` - Filter by blockchain
+- `minVolume` - Minimum 24h volume
+- `maxVolume` - Maximum 24h volume
+- `minLiquidity` - Minimum liquidity
+- `maxLiquidity` - Maximum liquidity
+- `minHolders` - Minimum number of holders
+- `maxRugScore` - Maximum rug score
+- `sortBy` - Sort column (created_at, volume_24h, liquidity_usd, etc.)
+- `sortOrder` - ASC or DESC
+
+**Example:**
+```bash
+curl "http://localhost:3000/api/tokens?chain=ethereum&minVolume=5000&limit=10"
+```
+
+### Get Token Details
+```
+GET /api/tokens/:pairAddress
+```
+
+### Get Statistics
+```
+GET /api/stats
+```
+
+### Update Token Status
+```
+PUT /api/tokens/:pairAddress/status
+Content-Type: application/json
+
+{
+  "status": "active|flagged|rug|delisted"
+}
+```
+
+## Dashboard Features
+
+### 📊 Statistics Overview
+- Total monitored tokens
+- Combined 24h volume
+- Average liquidity
+- Number of active chains
+
+### 🔍 Advanced Filtering
+- Chain selection
+- Volume range filtering
+- Liquidity range filtering
+- Minimum holders requirement
+- Maximum rug score threshold
+- Custom sorting options
+
+### 📱 Token Cards
+Each token displays:
+- Token name and symbol
+- Current price in USD
+- 24h price change (color-coded)
+- 24h volume
+- Liquidity amount
+- Number of holders
+- Rug score (safety indicator)
+- Risk flags (if any)
+- Creation time
+- Status badge
+
+### 🎯 Interactive Features
+- Click tokens to view on DexScreener
+- Real-time updates every 30 seconds
+- Responsive pagination
+- Mobile-friendly design
+
+## Monitoring Schedule
+
+The system runs on the following schedule:
+- **Token Scanning**: Every 5 minutes
+- **Dashboard Updates**: Every 30 seconds (client-side)
+- **Database Cleanup**: Daily (you can add this)
+
+## Database Schema
+
+### Tokens Table
+- `id` - Primary key
+- `pair_address` - Unique pair identifier
+- `chain_id` - Blockchain identifier
+- `base_token_*` - Token information
+- `price_*` - Price data and changes
+- `volume_*` - Trading volume metrics
+- `liquidity_usd` - Liquidity in USD
+- `holders_count` - Number of token holders
+- `top_holder_percentage` - Percentage owned by top holder
+- `net_traders` - Estimated number of active traders
+- `rug_score` - Risk assessment score
+- `rug_risks` - Array of identified risks
+- `status` - Token status (active/flagged/rug/delisted)
+- `created_at` - Record creation timestamp
+- `updated_at` - Last update timestamp
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Database Connection Error**
+   ```
+   Error: connect ECONNREFUSED 127.0.0.1:5432
+   ```
+   - Ensure PostgreSQL is running
+   - Check connection credentials
+   - Verify database exists
+
+2. **API Rate Limiting**
+   ```
+   Error: Request failed with status code 429
+   ```
+   - The system includes rate limiting (200ms delays)
+   - DexScreener allows 300 requests/minute
+   - RugCheck may have different limits
+
+3. **No Tokens Found**
+   - Check if monitoring is running
+   - Verify API endpoints are accessible
+   - Review filter criteria (might be too restrictive)
+
+4. **Dashboard Not Loading**
+   - Ensure server is running on correct port
+   - Check browser console for errors
+   - Verify API endpoints are responding
+
+### Debug Mode
+
+Enable debug logging by adding environment variable:
+```bash
+DEBUG=true node token-monitor.js
+```
+
+## Customization
+
+### Adding New Chains
+
+1. Update the chains array in `token-monitor.js`:
+```javascript
+await this.processTokens(['ethereum', 'bsc', 'polygon', 'avalanche', 'your_new_chain']);
+```
+
+2. Add chain option to the dashboard filter in `index.html`:
+```html
+<option value="your_new_chain">Your New Chain</option>
+```
+
+### Modifying Filters
+
+Adjust the filtering logic in the `filterToken()` method:
+
+```javascript
+async filterToken(pair, rugData) {
+  // Add custom filtering logic
+  const customMetric = pair.volume?.h24 / pair.liquidity?.usd;
+  if (customMetric < 0.1) {
+    return { passed: false, reason: 'Poor volume/liquidity ratio' };
+  }
+  
+  // ... existing filters
+}
+```
+
+### Adding New Metrics
+
+1. Update the database schema in `setup.js`
+2. Modify the data collection in `saveToken()`
+3. Update the dashboard display
+
+### Custom Notifications
+
+Add notification logic in the monitoring loop:
+
+```javascript
+if (filterResult.passed && rugData.score < 3) {
+  // Send notification (email, webhook, etc.)
+  console.log(`🚨 High-quality token found: ${pair.baseToken.symbol}`);
+}
+```
+
+## Performance Optimization
+
+### Database Optimization
+- Indexes are automatically created for common query patterns
+- Use `EXPLAIN ANALYZE` for query optimization
+- Consider partitioning for very large datasets
+
+### Memory Management
+- The system processes tokens in batches
+- Rate limiting prevents memory spikes
+- Old records can be archived or deleted
+
+### Scaling Considerations
+- Use Redis for caching frequently accessed data
+- Implement horizontal scaling with multiple monitoring instances
+- Consider using a message queue for high-volume processing
+
+## Security
+
+### API Security
+- Add authentication for write operations
+- Implement rate limiting on API endpoints
+- Validate all input parameters
+- Use HTTPS in production
+
+### Database Security
+- Use environment variables for credentials
+- Restrict database user permissions
+- Enable SSL connections
+- Regular security updates
+
+## Production Deployment
+
+### Using PM2 (Recommended)
+```bash
+# Install PM2
+npm install -g pm2
+
+# Create ecosystem file
+cat > ecosystem.config.js << EOF
+module.exports = {
+  apps: [
+    {
+      name: 'token-monitor',
+      script: 'token-monitor.js',
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '1G',
+      env: {
+        NODE_ENV: 'production'
+      }
+    },
+    {
+      name: 'token-server',
+      script: 'server.js',
+      instances: 1,
+      autorestart: true,
+      watch: false,
+      max_memory_restart: '1G',
+      env: {
+        NODE_ENV: 'production',
+        PORT: 3000
+      }
+    }
+  ]
+};
+EOF
+
+# Start applications
+pm2 start ecosystem.config.js
+
+# Setup startup script
+pm2 startup
+pm2 save
+```
+
+### Using Docker
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+```
+
+### Environment Variables
+Create a `.env` file for production:
+```env
+NODE_ENV=production
+PORT=3000
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=token_monitor
+DB_USER=your_username
+DB_PASSWORD=your_password
+DEXSCREENER_API_KEY=your_key_if_needed
+RUGCHECK_API_KEY=your_key_if_needed
+```
+
+## Monitoring and Alerts
+
+### Health Checks
+Add health check endpoints:
+```javascript
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime()
+  });
+});
+```
+
+### Logging
+Consider using structured logging:
+```bash
+npm install winston
+```
+
+### Metrics
+Track important metrics:
+- Tokens processed per hour
+- API response times
+- Database query performance
+- Error rates
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Disclaimer
+
+This tool is for educational and research purposes. Always do your own research before making investment decisions. The authors are not responsible for any financial losses.
+
+## Support
+
+For support and questions:
+- Check the troubleshooting section
+- Review the API documentation
+- Open an issue on GitHub
+- Join the community discussions
+
+---
+
+## Quick Start Commands
+
+```bash
+# 1. Setup
+git clone <repository>
+cd token-monitor
+npm install
+
+# 2. Configure database connection in all files
+# Edit: token-monitor.js, server.js, setup.js
+
+# 3. Setup database
+node setup.js
+
+# 4. Start monitoring (in background)
+pm2 start token-monitor.js
+
+# 5. Start web server
+npm start
+
+# 6. Open dashboard
+open http://localhost:3000
+```
+
+**Happy Token Hunting! 🚀**

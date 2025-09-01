@@ -1,0 +1,32 @@
+{
+    "name": "token-monitor",
+    "version": "1.0.0",
+    "description": "Automated token monitoring system with DexScreener and RugCheck integration",
+    "main": "token-monitor.js",
+    "scripts": {
+      "start": "node server.js",
+      "monitor": "node token-monitor.js",
+      "dev": "nodemon server.js",
+      "setup": "node setup.js"
+    },
+    "dependencies": {
+      "axios": "^1.6.0",
+      "cors": "^2.8.5",
+      "express": "^4.18.2",
+      "node-cron": "^3.0.3",
+      "pg": "^8.11.3"
+    },
+    "devDependencies": {
+      "nodemon": "^3.0.1"
+    },
+    "keywords": [
+      "defi",
+      "tokens",
+      "monitoring",
+      "dexscreener",
+      "rugcheck",
+      "cryptocurrency"
+    ],
+    "author": "Your Name",
+    "license": "MIT"
+  }
