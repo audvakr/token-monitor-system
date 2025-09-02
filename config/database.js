@@ -28,11 +28,11 @@ const dbConfig = {
   // Connection pool settings
   max: 20, // Maximum number of clients in the pool
   idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
-  connectionTimeoutMillis: 2000, // Return an error after 2 seconds if connection could not be established
+  connectionTimeoutMillis: 10000, // Return an error after 10 seconds if connection could not be established
   
   // Additional PostgreSQL settings for better performance
-  statement_timeout: 30000, // 30 second timeout for queries
-  query_timeout: 30000,
+  statement_timeout: 10000, // 10 second timeout for queries
+  query_timeout: 10000,
   application_name: 'token-monitor-system',
 };
 

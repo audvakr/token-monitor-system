@@ -1,6 +1,15 @@
 // setup.js - Database setup script
+require('dotenv').config(); // Explicitly load .env for standalone execution
 const { Pool } = require('pg');
-require('dotenv').config();
+// require('dotenv').config(); // Handled in config/index.js
+
+console.log('DEBUG: DB_HOST =', process.env.DB_HOST);
+console.log('DEBUG: DB_PORT =', process.env.DB_PORT);
+console.log('DEBUG: DB_NAME =', process.env.DB_NAME);
+console.log('DEBUG: DB_USER =', process.env.DB_USER);
+console.log('DEBUG: DB_PASSWORD =', process.env.DB_PASSWORD ? '********' : 'NOT SET'); // Mask password
+console.log('DEBUG: DB_SSL =', process.env.DB_SSL);
+console.log('DEBUG: DB_BOOTSTRAP_LOCAL =', process.env.DB_BOOTSTRAP_LOCAL);
 
 async function setupDatabase() {
   // Optional: local admin connection to create database (only if DB_BOOTSTRAP_LOCAL=true)
@@ -42,6 +51,11 @@ async function setupDatabase() {
       ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
     });
 
+    // Drop tables if they exist to ensure a clean setup
+    console.log('🔄 Dropping existing tables (if any)...');
+    await pool.query('DROP TABLE IF EXISTS tokens CASCADE;');
+    console.log('✅ Existing tables dropped.');
+
     // Create tables
     console.log('🔄 Creating tables...');
 
@@ -57,19 +71,27 @@ async function setupDatabase() {
         quote_token_address VARCHAR(255),
         quote_token_symbol VARCHAR(50),
         price_usd DECIMAL(20, 8),
+        price_sol DECIMAL(20, 8), -- New column for price in SOL
         volume_24h DECIMAL(20, 2),
         volume_6h DECIMAL(20, 2),
         volume_1h DECIMAL(20, 2),
+        volume_5m DECIMAL(20, 2), -- New column for 5m volume
         price_change_24h DECIMAL(10, 4),
         price_change_6h DECIMAL(10, 4),
         price_change_1h DECIMAL(10, 4),
+        price_change_5m DECIMAL(10, 4), -- New column for 5m price change
         liquidity_usd DECIMAL(20, 2),
+        sol_liquidity DECIMAL(20, 2), -- New column for Solana liquidity
         pair_created_at TIMESTAMP,
         holders_count INTEGER,
         top_holder_percentage DECIMAL(5, 2),
         net_traders INTEGER,
         rug_score INTEGER,
         rug_risks TEXT[],
+        freeze_authority VARCHAR(255), -- New column for freeze authority address
+        mint_authority VARCHAR(255), -- New column for mint authority address
+        update_authority VARCHAR(255), -- New column for update authority address
+        is_mutable BOOLEAN, -- New column for mutability status
         status VARCHAR(50) DEFAULT 'active',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -132,56 +154,33 @@ async function setupDatabase() {
         pair_address, chain_id, dex_id, base_token_address, base_token_name, 
         base_token_symbol, quote_token_address, quote_token_symbol, price_usd,
         volume_24h, volume_6h, volume_1h, price_change_24h, price_change_6h, 
-        price_change_1h, liquidity_usd, pair_created_at, holders_count, 
+        price_change_1h, liquidity_usd, sol_liquidity, pair_created_at, holders_count, 
         top_holder_percentage, net_traders, rug_score, rug_risks
       ) VALUES 
       (
-        '0x1234567890123456789012345678901234567890',
-        'ethereum',
-        'uniswap',
-        '0xabcdefabcdefabcdefabcdefabcdefabcdefabcd',
-        'Sample Token',
-        'SAMPLE',
-        '0xa0b86a33e6776e681c00f7d9c9e0d60b0e1e9e6b',
+        '0xsolana123456789012345678901234567890123456',
+        'solana',
+        'raydium',
+        '0xsolanabaseabcdefabcdefabcdefabcdefabcdef',
+        'Solana Sample Token',
+        'SOLT',
+        'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v', -- USDC on Solana
         'USDC',
-        0.000123,
-        15000.50,
-        3500.25,
-        500.10,
-        5.67,
-        2.34,
-        -1.23,
-        45000.00,
-        NOW() - INTERVAL '2 hours',
-        150,
-        15.5,
-        25,
-        2,
-        ARRAY['low_liquidity']
-      ),
-      (
-        '0x9876543210987654321098765432109876543210',
-        'bsc',
-        'pancakeswap',
-        '0xfedcbafedcbafedcbafedcbafedcbafedcbafedcba',
-        'Test Coin',
-        'TEST',
-        '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
-        'BNB',
-        0.00456,
-        8500.75,
-        2100.50,
-        350.25,
-        -2.45,
-        1.67,
-        0.89,
-        22000.00,
-        NOW() - INTERVAL '4 hours',
-        89,
-        25.2,
-        18,
-        4,
-        ARRAY['high_concentration', 'new_token']
+        0.005678,
+        25000.75,
+        12000.50,
+        2500.25,
+        10.25,
+        5.10,
+        3.45,
+        80000.00,
+        400.00, -- sol_liquidity (example value > 5)
+        NOW() - INTERVAL '1 hour',
+        300,
+        10.2,
+        50,
+        1,
+        ARRAY[]::TEXT[]
       )
       ON CONFLICT (pair_address) DO NOTHING;
     `;

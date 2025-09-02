@@ -328,13 +328,7 @@
                 <div class="filter-group">
                     <label>Chain</label>
                     <select id="chainFilter">
-                        <option value="">All Chains</option>
-                        <option value="ethereum">Ethereum</option>
-                        <option value="bsc">BSC</option>
-                        <option value="polygon">Polygon</option>
-                        <option value="arbitrum">Arbitrum</option>
-                        <option value="optimism">Optimism</option>
-                        <option value="avalanche">Avalanche</option>
+                        <option value="solana">Solana</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -429,9 +423,9 @@
                 
                 // Update stat cards
                 document.getElementById('totalTokens').textContent = stats.total[0]?.count || '0';
-                document.getElementById('totalVolume').textContent = formatCurrency(stats.volume24h[0]?.total_volume || 0);
+                document.getElementById('totalVolume').textContent = formatCurrency(stats.totalVolume[0]?.total_volume || 0);
                 document.getElementById('avgLiquidity').textContent = formatCurrency(stats.avgLiquidity[0]?.avg_liquidity || 0);
-                document.getElementById('activeChains').textContent = stats.chains?.length || '0';
+                document.getElementById('activeChains').textContent = stats.metadata?.chain || 'N/A';
                 
             } catch (error) {
                 console.error('Error loading stats:', error);

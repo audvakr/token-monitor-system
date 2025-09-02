@@ -1,0 +1,1615 @@
+[2025-09-02 06:20:10] [INFO] 🟣 Solana Token Monitor initialized {
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "maxTokensPerScan": 150
+}
+[2025-09-02 06:20:10] [INFO] 🔄 Manual Solana token scan initiated
+[2025-09-02 06:20:10] [INFO] 🟣 Starting Solana token processing...
+[2025-09-02 06:20:10] [ERROR] Error fetching Solana pairs from DexScreener: {}
+[2025-09-02 06:20:10] [INFO] Processing 0 Solana pairs
+[2025-09-02 06:20:10] [INFO] 🎉 Solana token processing complete {
+  "duration": "0ms",
+  "processed": 0,
+  "saved": 0,
+  "filtered": 0,
+  "successRate": "NaN%"
+}
+[2025-09-02 06:20:10] [INFO] 🟣 Solana scheduler started - running every 3 minutes
+[2025-09-02 06:20:10] [INFO] 🟣 Solana Token Monitor running successfully
+[2025-09-02 06:20:20] [INFO] 🔄 Shutting down Solana Token Monitor...
+[2025-09-02 06:20:20] [INFO] 🔄 Closing Solana Token Monitor...
+[2025-09-02 06:20:20] [INFO] ✅ Solana Token Monitor closed
+[2025-09-02 06:20:28] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:20:28] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:20:28] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:20:28] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:20:28] [INFO] 🟣 Solana Token Monitor API running on http://localhost:3000
+[2025-09-02 06:20:28] [INFO] 🎯 Monitoring DEXs: raydium, orca, jupiter, serum
+[2025-09-02 06:20:34] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:20:34] [INFO] Fetched 0 Solana tokens {
+  "total": 0,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:20:38] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:20:38] [INFO] Fetched 0 Solana tokens {
+  "total": 0,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:20:39] [INFO] Fetched 0 Solana tokens {
+  "total": 0,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:20:45] [INFO] Fetched 0 Solana tokens {
+  "total": 0,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:20:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:20:56] [INFO] Fetched 0 Solana tokens {
+  "total": 0,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:21:02] [INFO] 🔄 Shutting down server...
+[2025-09-02 06:30:39] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:30:39] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:30:39] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:30:39] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:30:39] [INFO] 🟣 Solana Token Monitor API running on http://localhost:3000
+[2025-09-02 06:30:39] [INFO] 🎯 Monitoring DEXs: raydium, orca, jupiter, serum
+[2025-09-02 06:30:46] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:30:54] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": 50,
+  "offset": 0,
+  "filters": {}
+}
+[2025-09-02 06:30:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:30:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:30:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:30:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:31:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:31:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:31:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:31:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:32:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:32:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:32:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:32:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:33:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:33:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:33:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:33:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:34:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:34:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:34:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:34:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:35:19] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:35:19] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:35:19] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:35:19] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:35:26] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:35:31] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": 50,
+  "offset": 0,
+  "filters": {}
+}
+[2025-09-02 06:35:37] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": 50,
+  "offset": 0,
+  "filters": {}
+}
+[2025-09-02 06:35:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:35:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:35:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:35:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:36:06] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:36:06] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:36:06] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:36:06] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:36:13] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:36:35] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:36:35] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:36:35] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:36:35] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:36:43] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:36:54] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:36:54] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:36:54] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:36:54] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:36:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:36:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:36:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:36:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:37:05] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:37:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:37:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:37:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:37:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:37:59] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:37:59] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:37:59] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:37:59] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:38:06] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:38:14] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": 50,
+  "offset": 0,
+  "filters": {}
+}
+[2025-09-02 06:38:32] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": 50,
+  "offset": 0,
+  "filters": {}
+}
+[2025-09-02 06:38:49] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:38:49] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:38:49] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:38:49] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:38:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:38:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:38:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:38:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:38:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:39:08] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:39:08] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:39:08] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:39:08] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:39:16] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:39:39] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:39:39] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:39:39] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:39:39] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:39:48] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:39:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:39:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:39:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:39:56] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:40:01] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:40:01] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:40:01] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:40:01] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:40:09] [ERROR] Error fetching stats: {
+  "length": 113,
+  "name": "error",
+  "severity": "ERROR",
+  "code": "42703",
+  "position": "12",
+  "file": "parse_relation.c",
+  "line": "3657",
+  "routine": "errorMissingColumn"
+}
+[2025-09-02 06:40:24] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:40:24] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:40:24] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:40:24] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:40:40] [INFO] 🔄 Shutting down server...
+[2025-09-02 06:40:46] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:40:46] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:40:46] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:40:46] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:40:46] [INFO] 🟣 Solana Token Monitor API running on http://localhost:3000
+[2025-09-02 06:40:46] [INFO] 🎯 Monitoring DEXs: raydium, orca, jupiter, serum
+[2025-09-02 06:40:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:40:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:40:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:40:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:41:14] [ERROR] Error fetching stats: {}
+[2025-09-02 06:41:14] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:41:16] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:41:44] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:41:44] [ERROR] Error fetching stats: {}
+[2025-09-02 06:41:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:41:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:41:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:41:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:42:14] [ERROR] Error fetching stats: {}
+[2025-09-02 06:42:14] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:42:28] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:42:32] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:42:32] [ERROR] Error fetching stats: {}
+[2025-09-02 06:42:45] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:42:45] [ERROR] Error fetching stats: {}
+[2025-09-02 06:42:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:42:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:42:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:42:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:43:03] [ERROR] Error fetching stats: {}
+[2025-09-02 06:43:03] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:43:15] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:43:15] [ERROR] Error fetching stats: {}
+[2025-09-02 06:43:33] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:43:33] [ERROR] Error fetching stats: {}
+[2025-09-02 06:43:45] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:43:45] [ERROR] Error fetching stats: {}
+[2025-09-02 06:43:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:43:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:43:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:43:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:44:03] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:44:03] [ERROR] Error fetching stats: {}
+[2025-09-02 06:44:15] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:44:15] [ERROR] Error fetching stats: {}
+[2025-09-02 06:44:17] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:44:19] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:44:33] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:44:33] [ERROR] Error fetching stats: {}
+[2025-09-02 06:44:45] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:44:45] [ERROR] Error fetching stats: {}
+[2025-09-02 06:44:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:44:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:44:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:44:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:44:58] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:45:02] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:45:02] [ERROR] Error fetching stats: {}
+[2025-09-02 06:45:33] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:45:33] [ERROR] Error fetching stats: {}
+[2025-09-02 06:45:46] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:45:46] [ERROR] Error fetching stats: {}
+[2025-09-02 06:45:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:45:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:45:56] [ERROR] Error fetching stats: {}
+[2025-09-02 06:45:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:46:02] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:46:02] [ERROR] Error fetching stats: {}
+[2025-09-02 06:46:14] [INFO] 🔄 Shutting down server...
+[2025-09-02 06:46:29] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:46:29] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:46:29] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:46:29] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:46:29] [INFO] 🟣 Solana Token Monitor API running on http://localhost:3000
+[2025-09-02 06:46:29] [INFO] 🎯 Monitoring DEXs: raydium, orca, jupiter, serum
+[2025-09-02 06:46:32] [ERROR] Error fetching stats: {}
+[2025-09-02 06:46:32] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:46:38] [INFO] 🔄 Shutting down server...
+[2025-09-02 06:46:58] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:46:58] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:46:58] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:46:58] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:46:58] [INFO] 🟣 Solana Token Monitor API running on http://localhost:3000
+[2025-09-02 06:46:58] [INFO] 🎯 Monitoring DEXs: raydium, orca, jupiter, serum
+[2025-09-02 06:53:24] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:53:24] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:53:24] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:53:24] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:53:24] [INFO] 🟣 Solana Token Monitor API running on http://localhost:3000
+[2025-09-02 06:53:24] [INFO] 🎯 Monitoring DEXs: raydium, orca, jupiter, serum
+[2025-09-02 06:53:53] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": 50,
+  "offset": 0,
+  "filters": {}
+}
+[2025-09-02 06:53:54] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:53:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:53:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:53:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:54:00] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": 50,
+  "offset": 0,
+  "filters": {}
+}
+[2025-09-02 06:54:24] [INFO] 🟣 Initializing Solana token monitoring system...
+[2025-09-02 06:54:24] [INFO] 🔄 Testing database connection...
+[2025-09-02 06:54:24] [INFO] ✅ Solana monitoring system initialized
+[2025-09-02 06:54:24] [INFO] 🟣 Solana Configuration Summary: {
+  "nodeEnv": "development",
+  "port": 3000,
+  "blockchain": "Solana",
+  "cluster": "mainnet-beta",
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "supportedDEXs": [
+    "raydium",
+    "orca",
+    "jupiter",
+    "serum"
+  ],
+  "priorityDEXs": [
+    "raydium",
+    "orca"
+  ],
+  "scanInterval": "3 minutes",
+  "maxTokensPerScan": 150,
+  "logLevel": "info",
+  "dbHost": "localhost",
+  "dbName": "token_monitor",
+  "filterSummary": {
+    "minHolders": 30,
+    "minVolume": "$500",
+    "minLiquidity": "$2000",
+    "maxTokenAge": "24h",
+    "maxRugScore": 6
+  }
+}
+[2025-09-02 06:54:55] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:54:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:54:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:54:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:55:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:55:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:55:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:55:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:56:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:56:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:56:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:56:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:57:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:57:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:57:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:57:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:58:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:58:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:58:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:58:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:59:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:59:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {
+    "minVolume": "1",
+    "minLiquidity": "10",
+    "minHolders": "1"
+  }
+}
+[2025-09-02 06:59:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}
+[2025-09-02 06:59:56] [INFO] Fetched 1 Solana tokens {
+  "total": 1,
+  "limit": "20",
+  "offset": "0",
+  "filters": {}
+}

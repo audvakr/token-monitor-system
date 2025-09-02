@@ -1,52 +1,55 @@
-// config/filters.js - Token filtering configuration and logic
-require('dotenv').config();
+// config/filters.js - Solana-optimized token filtering configuration
 
-// Filter configuration from environment variables
+// Solana-specific filter configuration
 const filterConfig = {
-  // Holder requirements
-  minHolders: parseInt(process.env.MIN_HOLDERS) || 50,
-  maxTopHolderPercentage: parseFloat(process.env.MAX_TOP_HOLDER_PERCENTAGE) || 50,
+  // Holder requirements (Solana typical values)
+  minHolders: 10, // Lower threshold for Solana
+  maxTopHolderPercentage: 40, // Slightly more lenient
 
-  // Volume requirements (USD)
-  minVolume24h: parseFloat(process.env.MIN_VOLUME_24H) || 1000,
-  maxVolume24h: parseFloat(process.env.MAX_VOLUME_24H) || null, // No upper limit by default
+  // Volume requirements (USD) - Solana has lower fees, so smaller volumes are viable
+  minVolume24h: 10, // Lower minimum for Solana
+  maxVolume24h: null,
 
-  // Liquidity requirements (USD)
-  minLiquidity: parseFloat(process.env.MIN_LIQUIDITY) || 5000,
-  maxLiquidity: parseFloat(process.env.MAX_LIQUIDITY) || null, // No upper limit by default
+  // Liquidity requirements (USD) - Solana DEXs typically have lower liquidity requirements
+  minLiquidity: 100, // Lower for Solana ecosystem
+  maxLiquidity: null,
 
-  // Trading activity
-  minNetTraders: parseInt(process.env.MIN_NET_TRADERS) || 10,
+  // Trading activity - Solana's fast transactions enable more traders
+  minNetTraders: 5,
 
-  // Token age requirements
-  maxTokenAgeHours: parseInt(process.env.MAX_TOKEN_AGE_HOURS) || 24,
-  minTokenAgeMinutes: parseInt(process.env.MIN_TOKEN_AGE_MINUTES) || 5, // Avoid brand new tokens
+  // Token age requirements - Solana tokens can move faster
+  maxTokenAgeHours: 24,
+  minTokenAgeMinutes: 3, // Faster for Solana
 
-  // Risk assessment
-  maxRugScore: parseInt(process.env.MAX_RUG_SCORE) || 7,
-  blockedRiskTypes: (process.env.BLOCKED_RISK_TYPES || 'honeypot,mint_function,proxy_contract').split(','),
+  // Solana-specific risk assessment
+  maxRugScore: 6, // Slightly more strict
+  blockedRiskTypes: ['honeypot', 'mint_function', 'proxy_contract', 'freeze_authority'],
 
-  // Price change filters (optional)
-  maxPriceChange24h: parseFloat(process.env.MAX_PRICE_CHANGE_24H) || null, // No pump filter by default
-  minPriceChange24h: parseFloat(process.env.MIN_PRICE_CHANGE_24H) || null, // No dump filter by default
+  // Price change filters
+  maxPriceChange24h: null,
+  minPriceChange24h: null,
 
-  // DEX and Chain filters
-  allowedDEXs: process.env.ALLOWED_DEXS ? process.env.ALLOWED_DEXS.split(',') : null, // All DEXs by default
-  blockedDEXs: process.env.BLOCKED_DEXS ? process.env.BLOCKED_DEXS.split(',') : [],
-  allowedChains: process.env.SUPPORTED_CHAINS ? process.env.SUPPORTED_CHAINS.split(',') : ['solana'],
+  // Solana DEX filters
+  allowedDEXs: ['raydium', 'orca', 'jupiter'],
+  blockedDEXs: [],
 
-  // Market cap estimates (optional)
-  minMarketCapUSD: parseFloat(process.env.MIN_MARKET_CAP_USD) || null,
-  maxMarketCapUSD: parseFloat(process.env.MAX_MARKET_CAP_USD) || null,
+  // Market cap estimates for Solana tokens
+  minMarketCapUSD: null,
+  maxMarketCapUSD: null,
+
+  // Solana-specific filters
+  minSOLLiquidity: 5, // Minimum SOL in liquidity pool
+  maxSlippage: 5, // Maximum expected slippage %
 };
 
-// Filter functions
-class TokenFilter {
+// Solana-focused token filter class
+class SolanaTokenFilter {
   constructor(config = filterConfig) {
     this.config = config;
+    this.chainId = 'solana';
   }
 
-  // Calculate holder distribution from RugCheck data
+  // Calculate holder distribution for Solana tokens
   calculateHolderDistribution(holdersData) {
     if (!holdersData || !holdersData.top) {
       return { count: 0, topPercentage: 100 };
@@ -57,7 +60,15 @@ class TokenFilter {
     
     let topHolderPercentage = 0;
     if (holders.length > 0) {
-      topHolderPercentage = (holders[0].balance / totalSupply) * 100;
+      // For Solana, exclude burn addresses and program accounts
+      const realHolders = holders.filter(holder => 
+        !this.isBurnAddress(holder.address) && 
+        !this.isProgramAccount(holder.address)
+      );
+      
+      if (realHolders.length > 0) {
+        topHolderPercentage = (realHolders[0].balance / totalSupply) * 100;
+      }
     }
 
     return {
@@ -66,28 +77,71 @@ class TokenFilter {
       distribution: holders.map(holder => ({
         address: holder.address,
         balance: holder.balance,
-        percentage: (holder.balance / totalSupply) * 100
+        percentage: (holder.balance / totalSupply) * 100,
+        isBurn: this.isBurnAddress(holder.address),
+        isProgram: this.isProgramAccount(holder.address)
       }))
     };
   }
 
-  // Estimate market cap from price and liquidity
+  // Check if address is a burn address
+  isBurnAddress(address) {
+    const burnAddresses = [
+      '11111111111111111111111111111111', // System program
+      '1nc1nerator11111111111111111111111111111111', // Incinerator
+      'DeadBeefDeadBeefDeadBeefDeadBeefDeadBeef' // Common burn pattern
+    ];
+    return burnAddresses.some(burn => address.includes(burn));
+  }
+
+  // Check if address is a program account
+  isProgramAccount(address) {
+    // Common Solana program addresses to exclude from holder analysis
+    const programPatterns = [
+      '11111111111111111111111111111111', // System Program
+      'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA', // Token Program
+      'ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL', // Associated Token Program
+    ];
+    return programPatterns.some(pattern => address === pattern);
+  }
+
+  // Estimate market cap specifically for Solana tokens
   estimateMarketCap(pair) {
-    // This is a rough estimation - actual market cap would need total supply
     const price = parseFloat(pair.priceUsd) || 0;
     const liquidity = pair.liquidity?.usd || 0;
     
-    // Rough estimate: assume liquidity represents ~5% of market cap
-    return liquidity * 20; // Very rough approximation
+    // For Solana, liquidity pools typically represent 2-8% of market cap
+    // Use conservative 5% estimate
+    return liquidity * 20;
   }
 
-  // Main filtering function
+  // Calculate SOL liquidity amount
+  getSOLLiquidity(pair) {
+    const solPrice = parseFloat(pair.priceNative) || 0;
+    const liquidityUSD = pair.liquidity?.usd || 0;
+    
+    if (solPrice <= 0) return 0;
+    
+    // Estimate SOL liquidity (roughly half of total liquidity if paired with SOL)
+    return (liquidityUSD * 0.5) / solPrice;
+  }
+
+  // Main filtering function for Solana tokens
   async filterToken(pair, rugData = {}) {
     const filters = [];
     
     // Basic validation
     if (!pair || !pair.pairAddress) {
       return { passed: false, reason: 'Invalid pair data', filters: ['validation'] };
+    }
+
+    // Ensure this is a Solana token
+    if (pair.chainId !== 'solana') {
+      return { 
+        passed: false, 
+        reason: `Non-Solana token detected: ${pair.chainId}`,
+        filters: ['chain_mismatch'] 
+      };
     }
 
     // Age filters
@@ -114,17 +168,7 @@ class TokenFilter {
       };
     }
 
-    // Chain filter
-    if (!this.config.allowedChains.includes(pair.chainId)) {
-      filters.push('chain');
-      return { 
-        passed: false, 
-        reason: `Chain not allowed: ${pair.chainId}`,
-        filters 
-      };
-    }
-
-    // DEX filters
+    // DEX filters - Solana specific
     if (this.config.blockedDEXs.includes(pair.dexId)) {
       filters.push('dex_blocked');
       return { 
@@ -138,7 +182,7 @@ class TokenFilter {
       filters.push('dex_allowed');
       return { 
         passed: false, 
-        reason: `DEX not in allowed list: ${pair.dexId}`,
+        reason: `DEX not allowed: ${pair.dexId} (allowed: ${this.config.allowedDEXs.join(', ')})`,
         filters 
       };
     }
@@ -164,23 +208,34 @@ class TokenFilter {
       };
     }
 
-    // Liquidity filters
-    const liquidity = pair.liquidity?.usd || 0;
+    // Liquidity filters (USD)
+    const liquidityUSD = pair.liquidity?.usd || 0;
     
-    if (liquidity < this.config.minLiquidity) {
+    if (liquidityUSD < this.config.minLiquidity) {
       filters.push('liquidity_min');
       return { 
         passed: false, 
-        reason: `Liquidity too low: $${liquidity.toLocaleString()} (min: $${this.config.minLiquidity.toLocaleString()})`,
+        reason: `Liquidity too low: $${liquidityUSD.toLocaleString()} (min: $${this.config.minLiquidity.toLocaleString()})`,
         filters 
       };
     }
 
-    if (this.config.maxLiquidity && liquidity > this.config.maxLiquidity) {
+    if (this.config.maxLiquidity && liquidityUSD > this.config.maxLiquidity) {
       filters.push('liquidity_max');
       return { 
         passed: false, 
-        reason: `Liquidity too high: $${liquidity.toLocaleString()} (max: $${this.config.maxLiquidity.toLocaleString()})`,
+        reason: `Liquidity too high: $${liquidityUSD.toLocaleString()} (max: $${this.config.maxLiquidity.toLocaleString()})`,
+        filters 
+      };
+    }
+
+    // SOL liquidity filter
+    const solLiquidity = this.getSOLLiquidity(pair);
+    if (solLiquidity < this.config.minSOLLiquidity) {
+      filters.push('sol_liquidity');
+      return { 
+        passed: false, 
+        reason: `SOL liquidity too low: ${solLiquidity.toFixed(2)} SOL (min: ${this.config.minSOLLiquidity})`,
         filters 
       };
     }
@@ -233,25 +288,25 @@ class TokenFilter {
       filters.push('rug_score');
       return { 
         passed: false, 
-        reason: `Rug score too high: ${rugScore} (max: ${this.config.maxRugScore})`,
+        reason: `Rug score too high: ${rugScore}/10 (max: ${this.config.maxRugScore})`,
         filters 
       };
     }
 
-    // Risk type filters
+    // Solana-specific risk type filters
     const risks = rugData.risks || [];
     const blockedRisks = risks.filter(risk => this.config.blockedRiskTypes.includes(risk));
     if (blockedRisks.length > 0) {
       filters.push('risk_types');
       return { 
         passed: false, 
-        reason: `Blocked risk types found: ${blockedRisks.join(', ')}`,
+        reason: `Blocked risk types: ${blockedRisks.join(', ')}`,
         filters 
       };
     }
 
-    // Net traders estimation (rough calculation from volume)
-    const netTraders = Math.floor(volume24h / 100); // Very rough estimation
+    // Net traders estimation (more accurate for Solana's fast/cheap transactions)
+    const netTraders = Math.floor(volume24h / 50); // Lower divisor for Solana
     if (netTraders < this.config.minNetTraders) {
       filters.push('net_traders');
       return { 
@@ -261,7 +316,7 @@ class TokenFilter {
       };
     }
 
-    // Market cap filters (if enabled)
+    // Market cap filters
     if (this.config.minMarketCapUSD || this.config.maxMarketCapUSD) {
       const estimatedMarketCap = this.estimateMarketCap(pair);
       
@@ -284,31 +339,71 @@ class TokenFilter {
       }
     }
 
-    // If we get here, the token passed all filters
+    // Solana-specific additional checks
+    
+    // Check for freeze authority (common Solana rug vector)
+    if (rugData.freezeAuthority && rugData.freezeAuthority !== null) {
+      filters.push('freeze_authority');
+      return { 
+        passed: false, 
+        reason: `Token has freeze authority: ${rugData.freezeAuthority}`,
+        filters 
+      };
+    }
+
+    // Check mint authority (another Solana rug vector)
+    if (rugData.mintAuthority && rugData.mintAuthority !== null) {
+      filters.push('mint_authority');
+      return { 
+        passed: false, 
+        reason: `Token has mint authority: ${rugData.mintAuthority}`,
+        filters 
+      };
+    }
+
+    // All filters passed
     return { 
       passed: true, 
       holderData,
       netTraders,
       rugScore,
       risks,
+      solLiquidity,
       estimatedMarketCap: this.estimateMarketCap(pair),
-      filters: [] // No failing filters
+      filters: []
     };
+  }
+
+  // Get filter statistics
+  getFilterStats() {
+    return {
+      config: this.config,
+      chainId: this.chainId,
+      summary: {
+        minHolders: this.config.minHolders,
+        maxTopHolder: `${this.config.maxTopHolderPercentage}%`,
+        minVolume: `$${this.config.minVolume24h.toLocaleString()}`,
+        minLiquidity: `$${this.config.minLiquidity.toLocaleString()}`,
+        maxTokenAge: `${this.config.maxTokenAgeHours}h`,
+        maxRugScore: this.config.maxRugScore,
+        allowedDEXs: this.config.allowedDEXs
+      }
+    };
+  }
+
+  // Update configuration at runtime
+  updateConfig(newConfig) {
+    this.config = { ...this.config, ...newConfig };
   }
 
   // Get current configuration
   getConfig() {
     return { ...this.config };
   }
-
-  // Update configuration
-  updateConfig(newConfig) {
-    this.config = { ...this.config, ...newConfig };
-  }
 }
 
-// Export filter configuration and class
+// Export Solana-focused filter configuration and class
 module.exports = {
   filterConfig,
-  TokenFilter
+  SolanaTokenFilter
 };
